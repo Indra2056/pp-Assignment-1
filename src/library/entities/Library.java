@@ -152,55 +152,55 @@ public class Library implements Serializable {
 	}
 
 	
-	public int gEt_LoAn_LiMiT() {
+	public int get_Loan_Limit() {
 		return lOaNlImIt;
 	}
 
 	
-	public boolean cAn_MeMbEr_BoRrOw(Member member) {		
-		if (member.gEt_nUmBeR_Of_CuRrEnT_LoAnS() == lOaNlImIt ) 
+	public boolean can_member_borrow(Member member) {		
+		if (member.get_number_Of_currentT_loans() == loanlImIt ) 
 			return false;
 				
-		if (member.FiNeS_OwEd() >= maxFinesOwed) 
+		if (member.Fines_Owed() >= maxFinesOwed) 
 			return false;
 				
 		for (Loan loan : member.GeT_LoAnS()) 
-			if (loan.Is_OvEr_DuE()) 
+			if (loan.isoverdue()) 
 				return false;
 			
 		return true;
 	}
 
 	
-	public int gEt_NuMbEr_Of_LoAnS_ReMaInInG_FoR_MeMbEr(Member MeMbEr) {		
-		return lOaNlImIt - MeMbEr.gEt_nUmBeR_Of_CuRrEnT_LoAnS();
+	public int get_number_Of_Loans_remaining_for_member(Member member) {		
+		return loanlImIt - member.get_number_Of_current_loans();
 	}
 
 	
-	public Loan iSsUe_LoAn(Book book, Member member) {
-		Date dueDate = Calendar.gEtInStAnCe().gEt_DuE_DaTe(loanPeriod);
+	public Loan issue_LoAn(Book book, Member member) {
+		Date dueDate = Calendargetinstance().get_duedate(loanPeriod);
 		Loan loan = new Loan(gEt_NeXt_LoAn_Id(), book, member, dueDate);
 		member.TaKe_OuT_LoAn(loan);
-		book.BoRrOw();
-		LoAnS.put(loan.GeT_Id(), loan);
-		CuRrEnT_LoAnS.put(book.gEtId(), loan);
+		book.Borrow();
+		loans.put(loan.GeT_Id(), loan);
+		current_loans.put(book.getId(), loan);
 		return loan;
 	}
 	
 	
-	public Loan GeT_LoAn_By_BoOkId(int bookId) {
-		if (CuRrEnT_LoAnS.containsKey(bookId)) 
-			return CuRrEnT_LoAnS.get(bookId);
+	public Loan Get_Loan_By_BookId(int bookId) {
+		if (current_loans.containsKey(bookId)) 
+			returncurrent_Loans.get(bookId);
 		
 		return null;
 	}
 
 	
-	public double CaLcUlAtE_OvEr_DuE_FiNe(Loan LoAn) {
-		if (LoAn.Is_OvEr_DuE()) {
-			long DaYs_OvEr_DuE = Calendar.gEtInStAnCe().GeT_DaYs_DiFfErEnCe(LoAn.GeT_DuE_DaTe());
-			double fInE = DaYs_OvEr_DuE * FiNe_PeR_DaY;
-			return fInE;
+	public double calculate_overdue_fine(Loan Loan) {
+		if (Loan.Is_Overdue()) {
+			long Days_OvEr_DuE = Calendar.getinstance().get_days_difference(loan.get_due_DaTe());
+			double fine = DaYs_OvEr_DuE * Fine_Per_DaY;
+			return fine;
 		}
 		return 0.0;		
 	}
