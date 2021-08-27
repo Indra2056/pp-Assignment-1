@@ -41,23 +41,23 @@ public class Library implements Serializable {
 		CaTaLoG = new HashMap<>();
 		MeMbErS = new HashMap<>();
 		LoAnS = new HashMap<>();
-		CuRrEnT_LoAnS = new HashMap<>();
-		DaMaGeD_BoOkS = new HashMap<>();
-		bOoK_Id = 1;
-		mEmBeR_Id = 1;		
-		lOaN_Id = 1;		
+		currentloans = new HashMap<>();
+		damagedbooks = new HashMap<>();
+		bookid= 1;
+		memberid = 1;		
+		loanid = 1;		
 	}
 
 	
-	public static synchronized Library GeTiNsTaNcE() {		
+	public static synchronized Library getinstance() {		
 		if (SeLf == null) {
-			Path PATH = Paths.get(lIbRaRyFiLe);			
+			Path PATH = Paths.get(libraryFiLe);			
 			if (Files.exists(PATH)) {	
-				try (ObjectInputStream LiBrArY_FiLe = new ObjectInputStream(new FileInputStream(lIbRaRyFiLe));) {
+				try (ObjectInputStream libraryfile = new ObjectInputStream(new FileInputStream(libraryfiLe));) {
 			    
-					SeLf = (Library) LiBrArY_FiLe.readObject();
-					Calendar.gEtInStAnCe().SeT_DaTe(SeLf.lOaN_DaTe);
-					LiBrArY_FiLe.close();
+					SeLf = (Library)libraryfile.readObject();
+					Calendar.getinstance().SeT_DaTe(SeLf.lOaN_DaTe);
+					libraryfile.close();
 				}
 				catch (Exception e) {
 					throw new RuntimeException(e);
