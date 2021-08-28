@@ -7,33 +7,33 @@ import library.entities.Library;
 import library.entities.Loan;
 import library.entities.Member;
 
-public class bORROW_bOOK_cONTROL {
+public class Borrowbookcontrol {
 	
 	private BorrowBookUI uI;
 	
-	private Library lIbRaRy;
-	private Member mEmBeR;
-	private enum CONTROL_STATE { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
-	private CONTROL_STATE sTaTe;
+	private Library Library;
+	private Member member;
+	private enum Controlstate INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
+	private Controlstate;
 	
-	private List<Book> pEnDiNg_LiSt;
-	private List<Loan> cOmPlEtEd_LiSt;
-	private Book bOoK;
+	private List<Book> pendinglist;
+	private List<Loan> completedlist;
+	private Book book;
 	
 	
-	public bORROW_bOOK_cONTROL() {
-		this.lIbRaRy = Library.GeTiNsTaNcE();
-		sTaTe = CONTROL_STATE.INITIALISED;
+	public Borrowbookcontrol() {
+		this.library = Library.getinstance();
+		state = Controlstate.initialized;
 	}
 	
 
-	public void SeT_Ui(BorrowBookUI Ui) {
+	public void SetUI(BorrowBookUI Ui) {
 		if (!sTaTe.equals(CONTROL_STATE.INITIALISED)) 
 			throw new RuntimeException("BorrowBookControl: cannot call setUI except in INITIALISED state");
 			
 		this.uI = Ui;
-		Ui.SeT_StAtE(BorrowBookUI.uI_STaTe.READY);
-		sTaTe = CONTROL_STATE.READY;		
+		Ui.Setstate(BorrowBookUI.uIstate.READY);
+		state = Controlstate.READY;		
 	}
 
 		
