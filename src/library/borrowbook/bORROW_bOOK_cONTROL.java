@@ -43,7 +43,7 @@ public class Borrowbookcontrol {
 			
 		member = library.getmember(memberId);
 		if (member == null) {
-			uI.DiSpLaY("Invalid memberId");
+			uI.display("Invalid memberId");
 			return;
 		}
 		if (library.canmembeborrow(member)) {
@@ -52,7 +52,7 @@ public class Borrowbookcontrol {
 			state = Controlstate.SCANNING; 
 		}
 		else {
-			uI.DiSpLaY("Member cannot borrow at this time");
+			uI.display("Member cannot borrow at this time");
 			uI.Setstate(BorrowBookUI.uIstate.RESTRICTED); 
 		}
 	}
@@ -72,12 +72,12 @@ public class Borrowbookcontrol {
 			uI.display("Book cannot be borrowed");
 			return;
 		}
-		pEnDiNg_LiSt.add(bOoK);
-		for (Book B : pEnDiNg_LiSt) 
-			uI.DiSpLaY(B.toString());
+		Pendonglist.add(book);
+		for (Book B : pendinglist) 
+			uI.display(B.toString());
 		
 		if (lIbRaRy.gEt_NuMbEr_Of_LoAnS_ReMaInInG_FoR_MeMbEr(mEmBeR) - pEnDiNg_LiSt.size() == 0) {
-			uI.DiSpLaY("Loan limit reached");
+			uI.display("Loan limit reached");
 			CoMpLeTe();
 		}
 	}
@@ -88,9 +88,9 @@ public class Borrowbookcontrol {
 			CaNcEl();
 		
 		else {
-			uI.DiSpLaY("\nFinal Borrowing List");
+			uI.display("\nFinal Borrowing List");
 			for (Book bOoK : pEnDiNg_LiSt) 
-				uI.DiSpLaY(bOoK.toString());
+				uI.display(bOoK.toString());
 			
 			cOmPlEtEd_LiSt = new ArrayList<Loan>();
 			uI.SeT_StAtE(BorrowBookUI.uI_STaTe.FINALISING);
@@ -107,9 +107,9 @@ public class Borrowbookcontrol {
 			Loan lOaN = lIbRaRy.iSsUe_LoAn(B, mEmBeR);
 			cOmPlEtEd_LiSt.add(lOaN);			
 		}
-		uI.DiSpLaY("Completed Loan Slip");
+		uI.display("Completed Loan Slip");
 		for (Loan LOAN : cOmPlEtEd_LiSt) 
-			uI.DiSpLaY(LOAN.toString());
+			uI.display(LOAN.toString());
 		
 		uI.SeT_StAtE(BorrowBookUI.uI_STaTe.COMPLETED);
 		sTaTe = CONTROL_STATE.COMPLETED;
