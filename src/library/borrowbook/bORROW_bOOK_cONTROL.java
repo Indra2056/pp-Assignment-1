@@ -68,7 +68,7 @@ public class Borrowbookcontrol {
 			uI.display("Invalid bookId");
 			return;
 		}
-		if (!bOoK.isavailable()) {
+		if (!book.isavailable()) {
 			uI.display("Book cannot be borrowed");
 			return;
 		}
@@ -78,12 +78,12 @@ public class Borrowbookcontrol {
 		
 		if (lIbRaRy.gEt_NuMbEr_Of_LoAnS_ReMaInInG_FoR_MeMbEr(mEmBeR) - pEnDiNg_LiSt.size() == 0) {
 			uI.display("Loan limit reached");
-			CoMpLeTe();
+			complete();
 		}
 	}
 	
 	
-	public void CoMpLeTe() {
+	public void complete() {
 		if (pEnDiNg_LiSt.size() == 0) 
 			CaNcEl();
 		
@@ -92,7 +92,7 @@ public class Borrowbookcontrol {
 			for (Book bOoK : pEnDiNg_LiSt) 
 				uI.display(bOoK.toString());
 			
-			cOmPlEtEd_LiSt = new ArrayList<Loan>();
+			completedList = new ArrayList<Loan>();
 			uI.SeT_StAtE(BorrowBookUI.uI_STaTe.FINALISING);
 			sTaTe = CONTROL_STATE.FINALISING;
 		}
@@ -105,14 +105,14 @@ public class Borrowbookcontrol {
 			
 		for (Book B : pEnDiNg_LiSt) {
 			Loan lOaN = lIbRaRy.iSsUe_LoAn(B, mEmBeR);
-			cOmPlEtEd_LiSt.add(lOaN);			
+			CompletedList.add(lOaN);			
 		}
 		uI.display("Completed Loan Slip");
-		for (Loan LOAN : cOmPlEtEd_LiSt) 
+		for (Loan LOAN :Completed_LiSt) 
 			uI.display(LOAN.toString());
 		
-		uI.SeT_StAtE(BorrowBookUI.uI_STaTe.COMPLETED);
-		sTaTe = CONTROL_STATE.COMPLETED;
+		uI.SeT_StAtE(BorrowBookUI.uI_STaTe.Completed);
+		sTaTe = CONTROL_STATE.Completed;
 	}
 
 	
