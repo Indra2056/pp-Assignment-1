@@ -37,39 +37,39 @@ public class Borrowbookcontrol {
 	}
 
 		
-	public void SwIpEd(int mEmBeR_Id) {
+	public void swiped(int memberId) {
 		if (!sTaTe.equals(CONTROL_STATE.READY)) 
 			throw new RuntimeException("BorrowBookControl: cannot call cardSwiped except in READY state");
 			
-		mEmBeR = lIbRaRy.gEt_MeMbEr(mEmBeR_Id);
-		if (mEmBeR == null) {
+		member = library.getmember(memberId);
+		if (member == null) {
 			uI.DiSpLaY("Invalid memberId");
 			return;
 		}
-		if (lIbRaRy.cAn_MeMbEr_BoRrOw(mEmBeR)) {
-			pEnDiNg_LiSt = new ArrayList<>();
+		if (library.canmembeborrow(member)) {
+			pendinglist = new ArrayList<>();
 			uI.SeT_StAtE(BorrowBookUI.uI_STaTe.SCANNING);
-			sTaTe = CONTROL_STATE.SCANNING; 
+			state = Controlstate.SCANNING; 
 		}
 		else {
 			uI.DiSpLaY("Member cannot borrow at this time");
-			uI.SeT_StAtE(BorrowBookUI.uI_STaTe.RESTRICTED); 
+			uI.Setstate(BorrowBookUI.uIstate.RESTRICTED); 
 		}
 	}
 	
 	
-	public void ScAnNeD(int bOoKiD) {
-		bOoK = null;
+	public void scanned(int bookID) {
+		book = null;
 		if (!sTaTe.equals(CONTROL_STATE.SCANNING)) 
 			throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
 			
-		bOoK = lIbRaRy.gEt_BoOk(bOoKiD);
-		if (bOoK == null) {
-			uI.DiSpLaY("Invalid bookId");
+		Book = library.getbook(bookId);
+		if (book == null) {
+			uI.display("Invalid bookId");
 			return;
 		}
-		if (!bOoK.iS_AvAiLaBlE()) {
-			uI.DiSpLaY("Book cannot be borrowed");
+		if (!bOoK.isavailable()) {
+			uI.display("Book cannot be borrowed");
 			return;
 		}
 		pEnDiNg_LiSt.add(bOoK);
